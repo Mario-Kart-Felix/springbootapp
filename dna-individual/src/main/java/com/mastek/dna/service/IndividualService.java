@@ -16,4 +16,14 @@ public class IndividualService
 	{
 		return individualDao.create(individual);
 	}
+
+	public Individual update(final Individual individual)
+	{
+		return individualDao.update(individual);
+	}
+
+	public void delete(final int id)
+	{
+		individualDao.delete(id);
+	}
 }
