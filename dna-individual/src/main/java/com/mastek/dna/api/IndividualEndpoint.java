@@ -41,8 +41,6 @@ public class IndividualEndpoint
 	@DeleteMapping("/individual/{id}")
 	public void delete(@PathVariable final int id)
 	{
-		// TODO : Discuss if the ID should be set in the body, then validated
-		// that its the same as the URL path parameter
 		individualService.delete(id);
 	}
 }
