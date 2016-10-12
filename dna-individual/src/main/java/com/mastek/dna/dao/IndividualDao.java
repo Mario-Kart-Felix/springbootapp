@@ -7,9 +7,9 @@ import com.mastek.dna.model.Individual;
 @Repository
 public class IndividualDao
 {
-	public Individual create(final Individual person)
+	public Individual create(final Individual individual)
 	{
-		person.setId(100);
-		return person;
+		individual.setId(100);
+		return individual;
 	}
 }
