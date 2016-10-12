@@ -2,10 +2,11 @@ package com.mastek.dna.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,14 +20,15 @@ public class IndividualEndpoint
 	@Autowired
 	private IndividualService individualService;
 
-	@RequestMapping(method = { RequestMethod.POST, RequestMethod.PUT })
+	@PostMapping
+	@PutMapping
 	@ResponseBody
 	public Individual create(@RequestBody @Validated(Create.class) final Individual individual)
 	{
 		return individualService.create(individual);
 	}
 
-	@RequestMapping(value = "/individual/{id}", method = RequestMethod.PUT)
+	@PutMapping("/individual/{id}")
 	@ResponseBody
 	public Individual update(@PathVariable final int id, @RequestBody @Validated final Individual individual)
 	{
@@ -36,8 +38,7 @@ public class IndividualEndpoint
 		return individualService.update(individual);
 	}
 
-	@RequestMapping(value = "/individual/{id}", method = RequestMethod.DELETE)
-	@ResponseBody
+	@DeleteMapping("/individual/{id}")
 	public void delete(@PathVariable final int id)
 	{
 		// TODO : Discuss if the ID should be set in the body, then validated
