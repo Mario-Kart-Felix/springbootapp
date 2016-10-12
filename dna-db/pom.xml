@@ -10,37 +10,15 @@
 
     <artifactId>dna-db</artifactId>
 
-    <properties>
-        <flyway.version>4.0.3</flyway.version>
-        <postgresql.version>9.4.1211.jre7</postgresql.version>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
-            <version>${flyway.version}</version>
         </dependency>
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>${postgresql.version}</version>
         </dependency>
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.flywaydb</groupId>
-                <artifactId>flyway-maven-plugin</artifactId>
-                <version>${flyway.version}</version>
-                <configuration>
-					<driver>org.postgresql.Driver</driver>
-                    <url>jdbc:postgresql://localhost:5555/postgres</url>
-                    <user>postgres</user>
-                    <password>password</password>
-				</configuration>
-            </plugin>
-        </plugins>
-    </build>
 </project>
