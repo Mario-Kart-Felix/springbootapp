@@ -3,15 +3,26 @@ package com.mastek.dna.api.it;
 import static com.mastek.dna.api.it.ValidationErrorMatcher.forValidationError;
 
 import java.nio.charset.Charset;
+import java.sql.SQLException;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.sql.DataSource;
+
+import org.dbunit.DatabaseUnitException;
+import org.dbunit.database.DatabaseDataSourceConnection;
+import org.dbunit.database.IDatabaseConnection;
+import org.dbunit.dataset.IDataSet;
+import org.dbunit.operation.DatabaseOperation;
+import org.dbunit.util.fileloader.DataFileLoader;
+import org.dbunit.util.fileloader.FlatXmlDataFileLoader;
 import org.hamcrest.core.IsCollectionContaining;
 import org.hamcrest.core.IsNot;
 import org.hamcrest.core.IsSame;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,6 +48,9 @@ import com.mastek.dna.config.Application;
 public class IndividualEndpointSuper
 {
 	@Autowired
+	private DataSource dataSource;
+
+	@Autowired
 	protected TestRestTemplate restTemplate;
 
 	@Value("${api.username}")
@@ -46,6 +60,16 @@ public class IndividualEndpointSuper
 	private String apiPassword;
 
 	private final static Logger LOGGER = LoggerFactory.getLogger(IndividualEndpointSuper.class);
+
+	@Before
+	public void loadData() throws SQLException, DatabaseUnitException
+	{
+		final IDatabaseConnection connection = new DatabaseDataSourceConnection(dataSource);
+		final DataFileLoader dataFileLoader = new FlatXmlDataFileLoader();
+		final IDataSet dataSet = dataFileLoader.load("/data/dataset.xml");
+
+		DatabaseOperation.CLEAN_INSERT.execute(connection, dataSet);
+	}
 
 	protected <I, O> O send(final I toSend, final HttpMethod httpMethod, final Class<O> responseClass)
 	{
