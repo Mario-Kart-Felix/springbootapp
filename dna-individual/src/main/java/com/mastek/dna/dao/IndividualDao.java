@@ -12,4 +12,14 @@ public class IndividualDao
 		individual.setId(100);
 		return individual;
 	}
+
+	public Individual update(final Individual individual)
+	{
+		return individual;
+	}
+
+	public void delete(final int id)
+	{
+		// TODO Auto-generated method stub
+	}
 }
