@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mastek.dna.model.Address;
-import com.mastek.dna.model.validator.Create;
+import com.mastek.dna.model.validator.Api;
 import com.mastek.dna.service.AddressService;
 
 @RestController
@@ -24,7 +24,7 @@ public class AddressEndpoint
 
 	@PostMapping(NEW_URL)
 	@PutMapping(NEW_URL)
-	public Address create(@PathVariable final int individualId, @RequestBody @Validated(Create.class) final Address address)
+	public Address create(@PathVariable final int individualId, @RequestBody @Validated(Api.class) final Address address)
 	{
 		return addressService.create(individualId, address);
 	}

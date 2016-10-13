@@ -19,7 +19,7 @@ import javax.validation.constraints.Null;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import com.mastek.dna.model.validator.Age;
-import com.mastek.dna.model.validator.Create;
+import com.mastek.dna.model.validator.Api;
 
 @Entity
 public class Individual
@@ -30,7 +30,7 @@ public class Individual
 
 	private Collection<Address> addresses;
 
-	@Null(groups = Create.class)
+	@Null(groups = Api.class)
 	@Id
 	@Column(name = "individual_id")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "individual_seq")
@@ -73,7 +73,7 @@ public class Individual
 		return this;
 	}
 
-	@Null(groups = Create.class)
+	@Null(groups = Api.class)
 	@OneToMany
 	@JoinColumn(name = "individual_id", updatable = false)
 	public Collection<Address> getAddresses()

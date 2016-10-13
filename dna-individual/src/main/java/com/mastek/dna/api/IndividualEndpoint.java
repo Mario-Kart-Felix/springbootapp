@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mastek.dna.model.Individual;
-import com.mastek.dna.model.validator.Create;
+import com.mastek.dna.model.validator.Api;
 import com.mastek.dna.service.IndividualService;
 
 @RestController
@@ -24,7 +24,7 @@ public class IndividualEndpoint
 
 	@PostMapping(NEW_URL)
 	@PutMapping(NEW_URL)
-	public Individual create(@RequestBody @Validated(Create.class) final Individual individual)
+	public Individual create(@RequestBody @Validated(Api.class) final Individual individual)
 	{
 		return individualService.create(individual);
 	}

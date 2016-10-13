@@ -14,7 +14,7 @@ import javax.validation.constraints.Null;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.mastek.dna.model.validator.Create;
+import com.mastek.dna.model.validator.Api;
 
 @Entity
 public class Address
@@ -28,7 +28,7 @@ public class Address
 	private String country;
 	private String postCode;
 
-	@Null(groups = Create.class)
+	@Null(groups = Api.class)
 	@Id
 	@Column(name = "address_id")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "address_seq")
