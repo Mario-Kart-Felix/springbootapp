@@ -9,36 +9,36 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mastek.dna.model.Individual;
+import com.mastek.dna.model.Address;
 import com.mastek.dna.model.validator.Create;
-import com.mastek.dna.service.IndividualService;
+import com.mastek.dna.service.AddressService;
 
 @RestController
-public class IndividualEndpoint
+public class AddressEndpoint
 {
-	private static final String NEW_URL = "/individual";
-	private static final String EXISTING_URL = "/individual/{id}";
+	private static final String NEW_URL = "/individual/{individualId}/address";
+	private static final String EXISTING_URL = "/individual/{individualId}/address/{id}";
 
 	@Autowired
-	private IndividualService individualService;
+	private AddressService addressService;
 
 	@PostMapping(NEW_URL)
 	@PutMapping(NEW_URL)
-	public Individual create(@RequestBody @Validated(Create.class) final Individual individual)
+	public Address create(@PathVariable final int individualId, @RequestBody @Validated(Create.class) final Address address)
 	{
-		return individualService.create(individual);
+		return addressService.create(individualId, address);
 	}
 
 	@PutMapping(EXISTING_URL)
-	public Individual update(@PathVariable final int id, @RequestBody @Validated final Individual individual)
+	public Address update(@PathVariable final int id, @RequestBody @Validated final Address address)
 	{
-		individual.setId(id);
-		return individualService.update(individual);
+		address.setId(id);
+		return addressService.update(address);
 	}
 
 	@DeleteMapping(EXISTING_URL)
 	public void delete(@PathVariable final int id)
 	{
-		individualService.delete(id);
+		addressService.delete(id);
 	}
 }

@@ -1,5 +1,8 @@
 package com.mastek.dna.dao;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.springframework.stereotype.Repository;
 
 import com.mastek.dna.model.Individual;
@@ -7,19 +10,27 @@ import com.mastek.dna.model.Individual;
 @Repository
 public class IndividualDao
 {
+	@PersistenceContext
+	private EntityManager entityManager;
+
+	public Individual get(final int id)
+	{
+		return entityManager.find(Individual.class, id);
+	}
+
 	public Individual create(final Individual individual)
 	{
-		individual.setId(100);
+		entityManager.persist(individual);
 		return individual;
 	}
 
 	public Individual update(final Individual individual)
 	{
-		return individual;
+		return entityManager.merge(individual);
 	}
 
-	public void delete(final int id)
+	public void delete(final Individual individual)
 	{
-		// TODO Auto-generated method stub
+		entityManager.remove(individual);
 	}
 }

@@ -1,9 +1,14 @@
 package com.mastek.dna.model;
 
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+@Embeddable
 public class Name
 {
 	private Title title;
@@ -12,6 +17,7 @@ public class Name
 	private String surname;
 
 	@NotNull
+	@Enumerated(EnumType.STRING)
 	public Title getTitle()
 	{
 		return title;
@@ -24,6 +30,7 @@ public class Name
 	}
 
 	@NotNull
+	@Column(name = "first_name")
 	public String getFirstname()
 	{
 		return firstname;
@@ -35,6 +42,7 @@ public class Name
 		return this;
 	}
 
+	@Column(name = "middle_name")
 	public String getMiddlename()
 	{
 		return middlename;
@@ -47,6 +55,7 @@ public class Name
 	}
 
 	@NotNull
+	@Column(name = "last_name")
 	public String getSurname()
 	{
 		return surname;

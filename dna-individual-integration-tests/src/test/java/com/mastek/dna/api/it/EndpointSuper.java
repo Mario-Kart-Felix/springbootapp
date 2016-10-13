@@ -35,6 +35,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.MultiValueMap;
@@ -45,7 +46,7 @@ import com.mastek.dna.config.Application;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @ContextConfiguration(classes = Application.class)
-public class IndividualEndpointSuper
+public abstract class EndpointSuper
 {
 	@Autowired
 	private DataSource dataSource;
@@ -59,7 +60,11 @@ public class IndividualEndpointSuper
 	@Value("${api.password}")
 	private String apiPassword;
 
-	private final static Logger LOGGER = LoggerFactory.getLogger(IndividualEndpointSuper.class);
+	protected JdbcTemplate jdbcTemplate;
+
+	private final static Logger LOGGER = LoggerFactory.getLogger(EndpointSuper.class);
+
+	protected abstract String getUrl();
 
 	@Before
 	public void loadData() throws SQLException, DatabaseUnitException
@@ -68,7 +73,20 @@ public class IndividualEndpointSuper
 		final DataFileLoader dataFileLoader = new FlatXmlDataFileLoader();
 		final IDataSet dataSet = dataFileLoader.load("/data/dataset.xml");
 
-		DatabaseOperation.CLEAN_INSERT.execute(connection, dataSet);
+		try
+		{
+			DatabaseOperation.CLEAN_INSERT.execute(connection, dataSet);
+		}
+		finally
+		{
+			connection.close();
+		}
+	}
+
+	@Before
+	public void setupJdbcTemplate()
+	{
+		jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
 	protected <I, O> O send(final I toSend, final HttpMethod httpMethod, final Class<O> responseClass)
@@ -111,11 +129,6 @@ public class IndividualEndpointSuper
 						.getBytes(Charset.forName("UTF-8")));
 
 		headers.set("Authorization", "Basic " + new String(encodedAuth));
-	}
-
-	protected String getUrl()
-	{
-		return "/individual";
 	}
 
 	protected Map<String, Object> getUrlVariables()

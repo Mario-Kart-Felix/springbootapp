@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<address address_id="$[address_id]" individual_id="$[individual_id]" address_line1="$[address_line1]" address_line2="$[address_line2]" 
+		county="$[county]" country="$[country]" post_code="$[post_code]" />
+</dataset>

@@ -40,5 +40,4 @@ public class ValidationErrorMatcher extends TypeSafeMatcher<ValidationError>
 		description.appendText("field was ").appendValue(validationError.getField())
 				.appendText(", message was ").appendValue(validationError.getMessage());
 	}
-
 }

@@ -1,8 +1,12 @@
-package com.mastek.dna.api.it;
+package com.mastek.dna.api.it.individual;
 
+import java.net.MalformedURLException;
+import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
 
+import org.dbunit.DatabaseUnitException;
 import org.hamcrest.collection.IsCollectionWithSize;
 import org.hamcrest.core.IsNull;
 import org.junit.Assert;
@@ -11,6 +15,7 @@ import org.springframework.http.HttpMethod;
 
 import com.mastek.dna.api.ValidationError;
 import com.mastek.dna.api.ValidationErrorList;
+import com.mastek.dna.api.matcher.IndividualMatcher;
 import com.mastek.dna.model.Address;
 import com.mastek.dna.model.Individual;
 import com.mastek.dna.model.Name;
@@ -22,34 +27,38 @@ public class IndividualEndpointCreateIT extends IndividualEndpointSuper
 	private static final String IS_REQUIRED = "is required";
 
 	@Test
-	public void testCreate()
+	public void testCreate() throws MalformedURLException, SQLException, DatabaseUnitException
 	{
 		final Individual individual = new Individual()
 				.setName(new Name().setTitle(Title.MR).setFirstname("Craig").setSurname("Greenhalgh"))
-				.setDob(LocalDate.of(1980, 7, 30))
-				.setAddress(new Address().setTown("Town"));
+				.setDob(LocalDate.of(1980, 7, 30));
 
 		final Individual created = send(individual, Individual.class);
 
 		Assert.assertThat("Id should not be null", created.getId(), IsNull.notNullValue());
 
-		Assert.assertThat("Unexpected created response", created, IndividualMatcher.forPerson(individual, true));
+		Assert.assertThat("Addresses should be null", created.getAddresses(), IsNull.nullValue());
 
-		// TODO : Assert the DB
+		Assert.assertThat("Unexpected created response", created, IndividualMatcher.forIndividual(individual));
+
+		individualChecker.assertDatabase(created);
 	}
 
 	@Test
 	public void testValidationFailureOfRootElements()
 	{
-		final Individual person = new Individual();
+		final Individual individual = new Individual();
 
-		final ValidationErrorList validationErrorList = send(person, ValidationErrorList.class);
+		individual.setAddresses(new HashSet<>());
+		individual.getAddresses().add(new Address());
+
+		final ValidationErrorList validationErrorList = send(individual, ValidationErrorList.class);
 
 		final List<ValidationError> errors = validationErrorList.getErrors();
 		Assert.assertThat("Unexpected error list size", errors, IsCollectionWithSize.hasSize(3));
 
 		assertValidationError(errors, "name", IS_REQUIRED);
-		assertValidationError(errors, "address", IS_REQUIRED);
+		assertValidationError(errors, "addresses", "must be null");
 		assertValidationError(errors, "dob", IS_REQUIRED);
 	}
 
@@ -62,12 +71,11 @@ public class IndividualEndpointCreateIT extends IndividualEndpointSuper
 		final ValidationErrorList validationErrorList = send(person, ValidationErrorList.class);
 
 		final List<ValidationError> errors = validationErrorList.getErrors();
-		Assert.assertThat("Unexpected error list size", errors, IsCollectionWithSize.hasSize(5));
+		Assert.assertThat("Unexpected error list size", errors, IsCollectionWithSize.hasSize(4));
 
 		assertValidationError(errors, "name.title", IS_REQUIRED);
 		assertValidationError(errors, "name.firstname", IS_REQUIRED);
 		assertValidationError(errors, "name.surname", IS_REQUIRED);
-		assertValidationError(errors, "address", IS_REQUIRED);
 		assertValidationError(errors, "dob", IS_REQUIRED);
 	}
 
