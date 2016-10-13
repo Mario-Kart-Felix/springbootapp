@@ -33,8 +33,8 @@ public class Individual
 	@Null(groups = Create.class)
 	@Id
 	@Column(name = "individual_id")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_seq")
-	@SequenceGenerator(name = "id_seq", sequenceName = "id_seq", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "individual_seq")
+	@SequenceGenerator(name = "individual_seq", sequenceName = "individual_seq", allocationSize = 1)
 	public Integer getId()
 	{
 		return id;

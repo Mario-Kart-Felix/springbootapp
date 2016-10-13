@@ -31,8 +31,8 @@ public class Address
 	@Null(groups = Create.class)
 	@Id
 	@Column(name = "address_id")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_seq")
-	@SequenceGenerator(name = "id_seq", sequenceName = "id_seq", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "address_seq")
+	@SequenceGenerator(name = "address_seq", sequenceName = "address_seq", allocationSize = 1)
 	public Integer getId()
 	{
 		return id;

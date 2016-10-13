@@ -17,18 +17,18 @@ public class IndividualService
 	@Transactional
 	public Individual create(final Individual individual)
 	{
-		return individualDao.create(individual);
+		return individualDao.save(individual);
 	}
 
 	@Transactional
 	public Individual update(final Individual individual)
 	{
-		return individualDao.update(individual);
+		return individualDao.save(individual);
 	}
 
 	@Transactional
 	public void delete(final int id)
 	{
-		individualDao.delete(individualDao.get(id));
+		individualDao.delete(individualDao.findOne(id));
 	}
 }

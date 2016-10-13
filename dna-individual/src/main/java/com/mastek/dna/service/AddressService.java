@@ -22,20 +22,20 @@ public class AddressService
 	@Transactional
 	public Address create(final int individualId, final Address address)
 	{
-		final Individual individual = individualDao.get(individualId);
+		final Individual individual = individualDao.findOne(individualId);
 
-		return addressDao.create(address.setIndividual(individual));
+		return addressDao.save(address.setIndividual(individual));
 	}
 
 	@Transactional
 	public Address update(final Address address)
 	{
-		return addressDao.update(address);
+		return addressDao.save(address);
 	}
 
 	@Transactional
 	public void delete(final int id)
 	{
-		addressDao.delete(addressDao.get(id));
+		addressDao.delete(addressDao.findOne(id));
 	}
 }

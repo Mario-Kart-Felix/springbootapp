@@ -1,36 +1,14 @@
 package com.mastek.dna.dao;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
-import org.springframework.stereotype.Repository;
+import org.springframework.data.repository.Repository;
 
 import com.mastek.dna.model.Address;
 
-@Repository
-public class AddressDao
+public interface AddressDao extends Repository<Address, Integer>
 {
-	@PersistenceContext
-	private EntityManager entityManager;
+	Address findOne(int id);
 
-	public Address get(final int id)
-	{
-		return entityManager.find(Address.class, id);
-	}
+	Address save(Address address);
 
-	public Address create(final Address address)
-	{
-		entityManager.persist(address);
-		return address;
-	}
-
-	public Address update(final Address address)
-	{
-		return entityManager.merge(address);
-	}
-
-	public void delete(final Address address)
-	{
-		entityManager.remove(address);
-	}
+	void delete(Address address);
 }

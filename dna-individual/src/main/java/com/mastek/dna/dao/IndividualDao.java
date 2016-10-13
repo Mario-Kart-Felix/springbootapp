@@ -1,36 +1,14 @@
 package com.mastek.dna.dao;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
-import org.springframework.stereotype.Repository;
+import org.springframework.data.repository.Repository;
 
 import com.mastek.dna.model.Individual;
 
-@Repository
-public class IndividualDao
+public interface IndividualDao extends Repository<Individual, Integer>
 {
-	@PersistenceContext
-	private EntityManager entityManager;
+	Individual findOne(int id);
 
-	public Individual get(final int id)
-	{
-		return entityManager.find(Individual.class, id);
-	}
+	Individual save(Individual individual);
 
-	public Individual create(final Individual individual)
-	{
-		entityManager.persist(individual);
-		return individual;
-	}
-
-	public Individual update(final Individual individual)
-	{
-		return entityManager.merge(individual);
-	}
-
-	public void delete(final Individual individual)
-	{
-		entityManager.remove(individual);
-	}
+	void delete(Individual individual);
 }

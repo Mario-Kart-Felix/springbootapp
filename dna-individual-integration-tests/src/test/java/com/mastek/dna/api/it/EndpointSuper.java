@@ -9,15 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.sql.DataSource;
-
 import org.dbunit.DatabaseUnitException;
-import org.dbunit.database.DatabaseDataSourceConnection;
-import org.dbunit.database.IDatabaseConnection;
-import org.dbunit.dataset.IDataSet;
-import org.dbunit.operation.DatabaseOperation;
-import org.dbunit.util.fileloader.DataFileLoader;
-import org.dbunit.util.fileloader.FlatXmlDataFileLoader;
 import org.hamcrest.core.IsCollectionContaining;
 import org.hamcrest.core.IsNot;
 import org.hamcrest.core.IsSame;
@@ -41,6 +33,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.MultiValueMap;
 
 import com.mastek.dna.api.ValidationError;
+import com.mastek.dna.api.db.DatabaseResetter;
 import com.mastek.dna.config.Application;
 
 @RunWith(SpringRunner.class)
@@ -48,11 +41,14 @@ import com.mastek.dna.config.Application;
 @ContextConfiguration(classes = Application.class)
 public abstract class EndpointSuper
 {
-	@Autowired
-	private DataSource dataSource;
+	// @Autowired
+	// private DataSource dataSource;
 
 	@Autowired
 	protected TestRestTemplate restTemplate;
+
+	@Autowired
+	private DatabaseResetter databaseResetter;
 
 	@Value("${api.username}")
 	private String apiUsername;
@@ -60,6 +56,7 @@ public abstract class EndpointSuper
 	@Value("${api.password}")
 	private String apiPassword;
 
+	@Autowired
 	protected JdbcTemplate jdbcTemplate;
 
 	private final static Logger LOGGER = LoggerFactory.getLogger(EndpointSuper.class);
@@ -69,25 +66,19 @@ public abstract class EndpointSuper
 	@Before
 	public void loadData() throws SQLException, DatabaseUnitException
 	{
-		final IDatabaseConnection connection = new DatabaseDataSourceConnection(dataSource);
-		final DataFileLoader dataFileLoader = new FlatXmlDataFileLoader();
-		final IDataSet dataSet = dataFileLoader.load("/data/dataset.xml");
-
-		try
-		{
-			DatabaseOperation.CLEAN_INSERT.execute(connection, dataSet);
-		}
-		finally
-		{
-			connection.close();
-		}
+		databaseResetter.reset(getDataset());
 	}
 
-	@Before
-	public void setupJdbcTemplate()
+	protected String getDataset()
 	{
-		jdbcTemplate = new JdbcTemplate(dataSource);
+		return "/data/dataset.xml";
 	}
+
+	// @Before
+	// public void setupJdbcTemplate()
+	// {
+	// jdbcTemplate = new JdbcTemplate(dataSource);
+	// }
 
 	protected <I, O> O send(final I toSend, final HttpMethod httpMethod, final Class<O> responseClass)
 	{
