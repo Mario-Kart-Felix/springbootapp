@@ -51,5 +51,7 @@
 		<module>dna-individual-integration-tests</module>
 		<module>dna-testing-utils</module>
 		<module>dna-db</module>
+        <module>dna-profile</module>
+		<module>dna-profile-integration-tests</module>
 	</modules>
 </project>
