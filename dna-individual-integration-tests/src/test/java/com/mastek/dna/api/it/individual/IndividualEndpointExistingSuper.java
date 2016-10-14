@@ -13,11 +13,7 @@ public class IndividualEndpointExistingSuper extends IndividualEndpointSuper
 	@Before
 	public void loadEntity()
 	{
-		existing = jdbcTemplate.queryForObject("SELECT * FROM individual i "
-				+ "LEFT JOIN address a ON a.individual_id = i.individual_id "
-				+ "WHERE a.individual_id IS NULL "
-				+ "LIMIT 1",
-				IndividualUtil.ROW_MAPPER);
+		existing = individualLoader.loadEntity();
 	}
 
 	@Override

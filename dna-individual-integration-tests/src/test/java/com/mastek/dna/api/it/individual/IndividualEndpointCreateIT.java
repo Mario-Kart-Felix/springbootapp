@@ -30,7 +30,7 @@ public class IndividualEndpointCreateIT extends IndividualEndpointSuper
 	public void testCreate() throws MalformedURLException, SQLException, DatabaseUnitException
 	{
 		final Individual individual = new Individual()
-				.setName(new Name().setTitle(Title.MR).setFirstname("Craig").setSurname("Greenhalgh"))
+				.setName(new Name().setTitle(Title.MR).setFirstname("John").setSurname("Smith"))
 				.setDob(LocalDate.of(1980, 7, 30));
 
 		final Individual created = send(individual, Individual.class);
@@ -65,10 +65,10 @@ public class IndividualEndpointCreateIT extends IndividualEndpointSuper
 	@Test
 	public void testValidationFailureOfRootElementChild()
 	{
-		final Individual person = new Individual()
+		final Individual individual = new Individual()
 				.setName(new Name());
 
-		final ValidationErrorList validationErrorList = send(person, ValidationErrorList.class);
+		final ValidationErrorList validationErrorList = send(individual, ValidationErrorList.class);
 
 		final List<ValidationError> errors = validationErrorList.getErrors();
 		Assert.assertThat("Unexpected error list size", errors, IsCollectionWithSize.hasSize(4));
@@ -77,6 +77,18 @@ public class IndividualEndpointCreateIT extends IndividualEndpointSuper
 		assertValidationError(errors, "name.firstname", IS_REQUIRED);
 		assertValidationError(errors, "name.surname", IS_REQUIRED);
 		assertValidationError(errors, "dob", IS_REQUIRED);
+	}
+
+	@Test
+	public void testValidationFailureOfDuplicate()
+	{
+		final Individual exising = individualLoader.loadEntity().setId(null);
+
+		final ValidationErrorList validationErrorList = send(exising, ValidationErrorList.class);
+
+		final List<ValidationError> errors = validationErrorList.getErrors();
+
+		assertValidationError(errors, "individual", "Duplicate individual");
 	}
 
 	private <I, O> O send(final I toSend, final Class<O> responseClass)

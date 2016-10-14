@@ -9,19 +9,15 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-@Target({ ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER })
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = AgeValidator.class)
+@Constraint(validatedBy = DuplicateValidator.class)
 @Documented
-public @interface Age
+public @interface Duplicate
 {
-	String message() default "{com.mastek.dna.model.validation.Age.message}";
+	String message() default "{com.mastek.dna.model.validation.Individual.duplicate.message}";
 
 	Class<?>[] groups() default {};
 
 	Class<? extends Payload>[] payload() default {};
-
-	int min() default -1;
-
-	int max() default -1;
 }

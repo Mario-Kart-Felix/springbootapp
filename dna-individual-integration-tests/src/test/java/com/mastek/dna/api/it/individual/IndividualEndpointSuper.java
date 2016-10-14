@@ -8,6 +8,9 @@ import com.mastek.dna.api.it.EndpointSuper;
 public class IndividualEndpointSuper extends EndpointSuper
 {
 	@Autowired
+	protected IndividualLoader individualLoader;
+
+	@Autowired
 	protected IndividualChecker individualChecker;
 
 	@Override
