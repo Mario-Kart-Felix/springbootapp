@@ -20,10 +20,10 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import com.mastek.dna.model.validator.Age;
 import com.mastek.dna.model.validator.Api;
-import com.mastek.dna.model.validator.Duplicate;
+import com.mastek.dna.model.validator.DuplicateIndividual;
 
 @Entity
-@Duplicate
+@DuplicateIndividual
 public class Individual
 {
 	private Integer id;

@@ -10,13 +10,13 @@ import com.mastek.dna.dao.IndividualDao;
 import com.mastek.dna.model.Individual;
 
 @Component
-public class DuplicateValidator implements ConstraintValidator<Duplicate, Individual>
+public class DuplicateIndividualValidator implements ConstraintValidator<DuplicateIndividual, Individual>
 {
 	@Autowired
 	private IndividualDao individualDao;
 
 	@Override
-	public void initialize(final Duplicate constraintAnnotation)
+	public void initialize(final DuplicateIndividual constraintAnnotation)
 	{
 		// Nothing to do
 	}

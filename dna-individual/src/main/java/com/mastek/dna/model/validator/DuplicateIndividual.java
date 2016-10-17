@@ -11,9 +11,9 @@ import javax.validation.Payload;
 
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = DuplicateValidator.class)
+@Constraint(validatedBy = DuplicateIndividualValidator.class)
 @Documented
-public @interface Duplicate
+public @interface DuplicateIndividual
 {
 	String message() default "{com.mastek.dna.model.validation.Individual.duplicate.message}";
 
