@@ -1,7 +1,7 @@
 --DROP TABLE individual;
 
 CREATE TABLE individual 
-(      individual_id                   INTEGER        PRIMARY KEY
+(      id			                   INTEGER        PRIMARY KEY
 ,      title                           VARCHAR(10)    NOT NULL
 ,      first_name                      VARCHAR(40)    NOT NULL
 ,      middle_name                     VARCHAR(40)

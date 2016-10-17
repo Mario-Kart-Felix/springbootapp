@@ -1,5 +1,5 @@
 CREATE TABLE address 
-(      address_id                      INTEGER        PRIMARY KEY
+(      id		                       INTEGER        PRIMARY KEY
 ,      individual_id                   INTEGER        REFERENCES individual
 ,      address_line1                   VARCHAR(100)   NOT NULL
 ,      address_line2                   VARCHAR(100)
