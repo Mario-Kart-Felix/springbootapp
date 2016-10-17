@@ -10,13 +10,13 @@ import javax.persistence.Converter;
 public class LocalDateConverter implements AttributeConverter<LocalDate, Date>
 {
 	@Override
-	public Date convertToDatabaseColumn(final java.time.LocalDate attribute)
+	public Date convertToDatabaseColumn(final LocalDate attribute)
 	{
 		return attribute == null ? null : Date.valueOf(attribute);
 	}
 
 	@Override
-	public java.time.LocalDate convertToEntityAttribute(final Date dbData)
+	public LocalDate convertToEntityAttribute(final Date dbData)
 	{
 		return dbData == null ? null : dbData.toLocalDate();
 	}
