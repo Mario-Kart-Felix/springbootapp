@@ -1,4 +1,4 @@
-package com.mastek.dna.api.it;
+package com.mastek.dna.api.it.matcher;
 
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;

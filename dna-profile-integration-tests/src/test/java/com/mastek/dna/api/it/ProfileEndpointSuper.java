@@ -1,6 +1,6 @@
 package com.mastek.dna.api.it;
 
-import static com.mastek.dna.api.it.ValidationErrorMatcher.forValidationError;
+import static com.mastek.dna.api.it.matcher.ValidationErrorMatcher.forValidationError;
 
 import java.util.HashMap;
 import java.util.List;
