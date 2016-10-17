@@ -41,9 +41,6 @@ import com.mastek.dna.config.Application;
 @ContextConfiguration(classes = Application.class)
 public abstract class EndpointSuper
 {
-	// @Autowired
-	// private DataSource dataSource;
-
 	@Autowired
 	protected TestRestTemplate restTemplate;
 
