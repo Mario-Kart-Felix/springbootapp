@@ -71,12 +71,6 @@ public abstract class EndpointSuper
 		return "/data/dataset.xml";
 	}
 
-	// @Before
-	// public void setupJdbcTemplate()
-	// {
-	// jdbcTemplate = new JdbcTemplate(dataSource);
-	// }
-
 	protected <I, O> O send(final I toSend, final HttpMethod httpMethod, final Class<O> responseClass)
 	{
 		final ResponseEntity<O> response = restTemplate.exchange(getUrl(), httpMethod, new HttpEntity<I>(toSend, getHeaders()), responseClass, getUrlVariables());
