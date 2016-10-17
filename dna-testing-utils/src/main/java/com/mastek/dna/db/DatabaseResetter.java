@@ -1,4 +1,4 @@
-package com.mastek.dna.api.db;
+package com.mastek.dna.db;
 
 import java.sql.SQLException;
 import java.util.List;

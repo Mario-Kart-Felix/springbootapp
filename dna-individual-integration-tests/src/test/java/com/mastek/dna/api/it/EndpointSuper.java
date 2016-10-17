@@ -33,8 +33,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.MultiValueMap;
 
 import com.mastek.dna.api.ValidationError;
-import com.mastek.dna.api.db.DatabaseResetter;
 import com.mastek.dna.config.Application;
+import com.mastek.dna.db.DatabaseResetter;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
