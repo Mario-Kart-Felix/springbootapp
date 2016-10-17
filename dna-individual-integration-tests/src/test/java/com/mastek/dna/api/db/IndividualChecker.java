@@ -10,6 +10,7 @@ import java.util.Arrays;
 import org.dbunit.DatabaseUnitException;
 import org.springframework.stereotype.Component;
 
+import com.mastek.dna.db.BaseChecker;
 import com.mastek.dna.model.Individual;
 
 @Component
