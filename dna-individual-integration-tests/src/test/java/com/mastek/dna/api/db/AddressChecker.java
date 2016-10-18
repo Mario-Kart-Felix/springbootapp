@@ -27,17 +27,11 @@ public class AddressChecker extends BaseChecker
 		return "address";
 	}
 
-	@Override
-	public String getTableIdentifier()
-	{
-		return "address_id";
-	}
-
 	public void assertDatabase(final int individualId, final Address address) throws MalformedURLException, SQLException, DatabaseUnitException
 	{
 		assertTable(address.getId(),
 				Arrays.asList(
-						of("$[address_id]", address.getId()),
+						of("$[id]", address.getId()),
 						of("$[individual_id]", individualId),
 						of("$[address_line1]", address.getLine1()),
 						of("$[address_line2]", address.getLine2()),

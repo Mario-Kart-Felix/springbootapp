@@ -30,7 +30,6 @@ public class Address
 
 	@Null(groups = Api.class)
 	@Id
-	@Column(name = "address_id")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "address_seq")
 	@SequenceGenerator(name = "address_seq", sequenceName = "address_seq", allocationSize = 1)
 	public Integer getId()

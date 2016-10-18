@@ -12,7 +12,7 @@ public final class AddressUtil
 	}
 
 	public static final RowMapper<Address> ROW_MAPPER = (rs, rowNumber) -> new Address()
-			.setId(rs.getInt("address_id"))
+			.setId(rs.getInt("id"))
 			.setLine1(rs.getString("address_line1"))
 			.setLine2(rs.getString("address_line2"))
 			.setCounty(rs.getString("county"))

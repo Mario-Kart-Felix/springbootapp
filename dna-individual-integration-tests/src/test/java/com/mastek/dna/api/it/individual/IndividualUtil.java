@@ -14,7 +14,7 @@ public final class IndividualUtil
 	}
 
 	public static final RowMapper<Individual> ROW_MAPPER = (rs, rowNumber) -> new Individual()
-			.setId(rs.getInt("individual_id"))
+			.setId(rs.getInt("id"))
 			.setName(new Name()
 					.setTitle(Title.valueOf(rs.getString("title")))
 					.setFirstname(rs.getString("first_name"))

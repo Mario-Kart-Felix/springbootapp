@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-	<individual individual_id="$[individual_id]" title="$[title]" first_name="$[firstname]" middle_name="$[middlename]" last_name="$[surname]" dob="$[dob]" />
+	<individual id="$[id]" title="$[title]" first_name="$[firstname]" middle_name="$[middlename]" last_name="$[surname]" dob="$[dob]" />
 </dataset>

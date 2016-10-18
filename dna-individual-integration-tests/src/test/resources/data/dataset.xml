@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-	<individual individual_id="1" title="MR" first_name="John" last_name="Smith" dob="1950-02-21" />
-	<address address_id="1" individual_id="1" address_line1="line1" address_line2="line2" county="county" country="country" post_code="AB12 3DE" />
+	<individual id="1" title="MR" first_name="John" last_name="Smith" dob="1950-02-21" />
+	<address id="1" individual_id="1" address_line1="line1" address_line2="line2" county="county" country="country" post_code="AB12 3DE" />
 	
-	<individual individual_id="2" title="MR" first_name="No" last_name="Address" dob="1990-01-29" />
+	<individual id="2" title="MR" first_name="No" last_name="Address" dob="1990-01-29" />
 	
 </dataset>

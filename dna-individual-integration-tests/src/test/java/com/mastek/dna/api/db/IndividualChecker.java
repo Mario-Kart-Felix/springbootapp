@@ -28,17 +28,11 @@ public class IndividualChecker extends BaseChecker
 		return "individual";
 	}
 
-	@Override
-	public String getTableIdentifier()
-	{
-		return "individual_id";
-	}
-
 	public void assertDatabase(final Individual individual) throws MalformedURLException, SQLException, DatabaseUnitException
 	{
 		assertTable(individual.getId(),
 				Arrays.asList(
-						of("$[individual_id]", individual.getId()),
+						of("$[id]", individual.getId()),
 						of("$[title]", individual.getName().getTitle()),
 						of("$[firstname]", individual.getName().getFirstname()),
 						of("$[middlename]", individual.getName().getMiddlename()),

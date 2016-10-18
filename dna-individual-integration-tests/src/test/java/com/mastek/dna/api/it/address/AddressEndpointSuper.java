@@ -18,7 +18,7 @@ public class AddressEndpointSuper extends EndpointSuper
 	@Before
 	public void loadIndividual()
 	{
-		individualId = jdbcTemplate.queryForObject("SELECT individual_id FROM individual LIMIT 1", Integer.class);
+		individualId = jdbcTemplate.queryForObject("SELECT id FROM individual LIMIT 1", Integer.class);
 	}
 
 	@Override

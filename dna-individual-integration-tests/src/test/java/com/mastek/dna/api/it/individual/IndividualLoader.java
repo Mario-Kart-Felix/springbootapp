@@ -15,7 +15,7 @@ public class IndividualLoader
 	public Individual loadEntity()
 	{
 		return jdbcTemplate.queryForObject("SELECT * FROM individual i "
-				+ "LEFT JOIN address a ON a.individual_id = i.individual_id "
+				+ "LEFT JOIN address a ON a.individual_id = i.id "
 				+ "WHERE a.individual_id IS NULL "
 				+ "LIMIT 1",
 				IndividualUtil.ROW_MAPPER);

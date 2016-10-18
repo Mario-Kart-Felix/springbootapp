@@ -3,7 +3,6 @@ package com.mastek.dna.model;
 import java.time.LocalDate;
 import java.util.Collection;
 
-import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,7 +33,6 @@ public class Individual
 
 	@Null(groups = Api.class)
 	@Id
-	@Column(name = "individual_id")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "individual_seq")
 	@SequenceGenerator(name = "individual_seq", sequenceName = "individual_seq", allocationSize = 1)
 	public Integer getId()
