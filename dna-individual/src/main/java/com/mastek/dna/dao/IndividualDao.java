@@ -8,7 +8,7 @@ import com.mastek.dna.model.Individual;
 
 public interface IndividualDao extends Repository<Individual, Integer>
 {
-	Individual findOne(int id);
+	Individual findOne(Integer id);
 
 	Individual save(Individual individual);
 
