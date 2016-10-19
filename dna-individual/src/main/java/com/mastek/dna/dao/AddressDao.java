@@ -6,7 +6,7 @@ import com.mastek.dna.model.Address;
 
 public interface AddressDao extends Repository<Address, Integer>
 {
-	Address findOne(int id);
+	Address findOne(Integer id);
 
 	Address save(Address address);
 
