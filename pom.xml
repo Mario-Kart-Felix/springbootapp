@@ -4,20 +4,22 @@
 
 	<groupId>com.mastek</groupId>
 	<artifactId>dna</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 
 	<packaging>pom</packaging>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
- 	
+
 		<spring.boot.version>1.4.1.RELEASE</spring.boot.version>
-		
+
 		<db.username>postgres</db.username>
 		<db.password>password</db.password>
-		
+
 		<api.username>username</api.username>
 		<api.password>password</api.password>
+		
+		<sonar.branch>master</sonar.branch>
 	</properties>
 
 	<dependencyManagement>
@@ -33,6 +35,16 @@
 	</dependencyManagement>
 
 	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.sonarsource.scanner.maven</groupId>
+					<artifactId>sonar-maven-plugin</artifactId>
+					<version>3.2</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -51,7 +63,7 @@
 		<module>dna-individual-integration-tests</module>
 		<module>dna-testing-utils</module>
 		<module>dna-db</module>
-        <module>dna-profile</module>
+		<module>dna-profile</module>
 		<module>dna-profile-integration-tests</module>
 	</modules>
 </project>
