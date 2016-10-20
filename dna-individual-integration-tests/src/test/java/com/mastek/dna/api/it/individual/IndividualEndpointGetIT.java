@@ -72,6 +72,7 @@ public class IndividualEndpointGetIT extends IndividualEndpointSuper
 	@Test
 	public void testValidationFailureOfNonExistingId()
 	{
+		endPoint = "/individual/";
 		final Individual individual = send(null, HttpMethod.GET, null);
 
 		Assert.assertNull(individual);
