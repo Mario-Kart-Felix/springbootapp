@@ -30,6 +30,16 @@ public class AddressEndpointCreateIT extends AddressEndpointSuper
 		addressChecker.assertDatabase(individualId, created);
 	}
 
+	@Test
+	public void testCreateIndividualNotFound()
+	{
+		individualId = 1000;
+
+		final Address address = new Address().setLine1("line1").setLine2("line2").setCounty("county").setCountry("country").setPostCode("AB12 3CD");
+
+		send(address, null, HttpStatus.NOT_FOUND);
+	}
+
 	private <I, O> O send(final I toSend, final Class<O> responseClass, final HttpStatus httpStatus)
 	{
 		return send(toSend, HttpMethod.POST, responseClass, httpStatus);

@@ -33,15 +33,15 @@ public class AddressEndpoint
 	}
 
 	@PutMapping(EXISTING_URL)
-	public Address update(@PathVariable final int id, @RequestBody @Validated final Address address)
+	public Address update(@PathVariable final int individualId, @PathVariable final int id, @RequestBody @Validated final Address address)
 	{
 		address.setId(id);
-		return addressService.update(address);
+		return addressService.update(individualId, address);
 	}
 
 	@DeleteMapping(EXISTING_URL)
-	public void delete(@PathVariable final int id)
+	public void delete(@PathVariable final int individualId, @PathVariable final int id)
 	{
-		addressService.delete(id);
+		addressService.delete(individualId, id);
 	}
 }

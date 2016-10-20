@@ -28,14 +28,14 @@ public class AddressService
 	}
 
 	@Transactional
-	public Address update(final Address address)
+	public Address update(final int individualId, final Address address)
 	{
 		return addressDao.save(address);
 	}
 
 	@Transactional
-	public void delete(final int id)
+	public void delete(final int individualId, final int id)
 	{
-		addressDao.delete(addressDao.findOne(id));
+		addressDao.delete(id);
 	}
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import com.mastek.dna.api.NotFoundException;
 import com.mastek.dna.dao.IndividualDao;
+import com.mastek.dna.model.Address;
 import com.mastek.dna.model.Individual;
 
 @Component
@@ -32,10 +33,16 @@ public class IndividualAspect
 		checkExists(id);
 	}
 
+	@Before("execution(* com.mastek.dna.service.AddressService.create(..)) and args(individualId, address)")
+	public void beforeCreate(final int individualId, final Address address)
+	{
+		checkExists(individualId);
+	}
+
 	private void checkExists(final int id)
 	{
 		final boolean exists = individualDao.exists(id);
-		LOGGER.info("Individual Found with ID [{}] [{}]", id, exists);
+		LOGGER.info("Individual Found with ID [{}] : [{}]", id, exists);
 		if (!exists)
 		{
 			throw new NotFoundException(id);

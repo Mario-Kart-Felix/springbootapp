@@ -33,6 +33,22 @@ public class AddressEndpointUpdateIT extends AddressEndpointExistingSuper
 		addressChecker.assertDatabase(individualId, updated);
 	}
 
+	@Test
+	public void testUpdateNotFound()
+	{
+		existing.setId(1000);
+
+		send(existing, null, HttpStatus.NOT_FOUND);
+	}
+
+	@Test
+	public void testUpdateIndividualNotFound()
+	{
+		individualId = 1000;
+
+		send(existing, null, HttpStatus.NOT_FOUND);
+	}
+
 	private <I, O> O send(final I toSend, final Class<O> responseClass, final HttpStatus httpStatus)
 	{
 		return send(toSend, HttpMethod.PUT, responseClass, httpStatus);
