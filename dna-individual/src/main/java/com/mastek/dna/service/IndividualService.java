@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.mastek.dna.dao.IndividualDao;
 import com.mastek.dna.model.Individual;
 
+import java.util.List;
+
 @Service
 public class IndividualService
 {
@@ -30,5 +32,17 @@ public class IndividualService
 	public void delete(final int id)
 	{
 		individualDao.delete(individualDao.findOne(id));
+	}
+
+	@Transactional
+	public Individual find(final int id)
+	{
+		return individualDao.findOne(id);
+	}
+
+	@Transactional
+	public List<Individual> findAll()
+	{
+		return individualDao.findAll();
 	}
 }

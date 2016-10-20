@@ -2,16 +2,13 @@ package com.mastek.dna.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.mastek.dna.model.Individual;
 import com.mastek.dna.model.validator.Api;
 import com.mastek.dna.service.IndividualService;
+
+import java.util.List;
 
 @RestController
 public class IndividualEndpoint
@@ -40,5 +37,17 @@ public class IndividualEndpoint
 	public void delete(@PathVariable final int id)
 	{
 		individualService.delete(id);
+	}
+
+	@GetMapping(EXISTING_URL)
+	public Individual find(@PathVariable final int id)
+	{
+		return individualService.find(id);
+	}
+
+	@GetMapping(NEW_URL)
+	public List<Individual> find()
+	{
+		return individualService.findAll();
 	}
 }

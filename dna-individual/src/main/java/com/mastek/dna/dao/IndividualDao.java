@@ -1,6 +1,7 @@
 package com.mastek.dna.dao;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.data.repository.Repository;
 
@@ -9,6 +10,8 @@ import com.mastek.dna.model.Individual;
 public interface IndividualDao extends Repository<Individual, Integer>
 {
 	Individual findOne(int id);
+
+	List<Individual> findAll();
 
 	Individual save(Individual individual);
 
