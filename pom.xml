@@ -80,6 +80,7 @@
 		<module>dna-profile</module>
 		<module>dna-profile-integration-tests</module>
 		<module>dna-registry</module>
+		<module>dna-web</module>
 	</modules>
 
 	<repositories>
