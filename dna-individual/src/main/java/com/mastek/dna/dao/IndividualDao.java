@@ -9,13 +9,15 @@ import com.mastek.dna.model.Individual;
 
 public interface IndividualDao extends Repository<Individual, Integer>
 {
-	Individual findOne(Integer id);
+	boolean exists(int id);
+
+	Individual findOne(int id);
 
 	List<Individual> findAll();
 
 	Individual save(Individual individual);
 
-	void delete(Individual individual);
+	void delete(int id);
 
 	Individual findByDobAndNameFirstnameAndNameSurname(LocalDate dob, String firstname, String surname);
 }

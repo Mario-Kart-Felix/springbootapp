@@ -1,51 +1,60 @@
 package com.mastek.dna.api;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.mastek.dna.model.Individual;
 import com.mastek.dna.model.validator.Api;
 import com.mastek.dna.service.IndividualService;
 
-import java.util.List;
-
 @RestController
 public class IndividualEndpoint
 {
-	private static final String NEW_URL = "/individual";
-	private static final String EXISTING_URL = "/individual/{id}";
+	private static final String ROOT_URL = "/individual";
+	private static final String URL_WITH_ID = ROOT_URL + "/{id}";
 
 	@Autowired
 	private IndividualService individualService;
 
-	@PostMapping(NEW_URL)
-	@PutMapping(NEW_URL)
+	@PostMapping(ROOT_URL)
+	@PutMapping(ROOT_URL)
+	@ResponseStatus(HttpStatus.CREATED)
 	public Individual create(@RequestBody @Validated(Api.class) final Individual individual)
 	{
 		return individualService.create(individual);
 	}
 
-	@PutMapping(EXISTING_URL)
+	@PutMapping(URL_WITH_ID)
 	public Individual update(@PathVariable final int id, @RequestBody @Validated final Individual individual)
 	{
 		individual.setId(id);
 		return individualService.update(individual);
 	}
 
-	@DeleteMapping(EXISTING_URL)
+	@DeleteMapping(URL_WITH_ID)
 	public void delete(@PathVariable final int id)
 	{
 		individualService.delete(id);
 	}
 
-	@GetMapping(EXISTING_URL)
+	@GetMapping(URL_WITH_ID)
 	public Individual find(@PathVariable final int id)
 	{
 		return individualService.find(id);
 	}
 
-	@GetMapping(NEW_URL)
+	@GetMapping(ROOT_URL)
 	public List<Individual> find()
 	{
 		return individualService.findAll();

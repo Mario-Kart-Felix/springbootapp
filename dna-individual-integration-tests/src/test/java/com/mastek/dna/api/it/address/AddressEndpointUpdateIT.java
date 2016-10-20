@@ -8,6 +8,7 @@ import org.hamcrest.core.Is;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 
 import com.mastek.dna.api.matcher.AddressMatcher;
 import com.mastek.dna.model.Address;
@@ -23,7 +24,7 @@ public class AddressEndpointUpdateIT extends AddressEndpointExistingSuper
 				.setCountry("new country")
 				.setPostCode("XY01 QA1");
 
-		final Address updated = send(existing, Address.class);
+		final Address updated = send(existing, Address.class, HttpStatus.OK);
 
 		Assert.assertThat("Id should not change", updated.getId(), Is.is(existing.getId()));
 
@@ -32,8 +33,24 @@ public class AddressEndpointUpdateIT extends AddressEndpointExistingSuper
 		addressChecker.assertDatabase(individualId, updated);
 	}
 
-	private <I, O> O send(final I toSend, final Class<O> responseClass)
+	@Test
+	public void testUpdateNotFound()
 	{
-		return send(toSend, HttpMethod.PUT, responseClass);
+		existing.setId(1000);
+
+		send(existing, null, HttpStatus.NOT_FOUND);
+	}
+
+	@Test
+	public void testUpdateIndividualNotFound()
+	{
+		individualId = 1000;
+
+		send(existing, null, HttpStatus.NOT_FOUND);
+	}
+
+	private <I, O> O send(final I toSend, final Class<O> responseClass, final HttpStatus httpStatus)
+	{
+		return send(toSend, HttpMethod.PUT, responseClass, httpStatus);
 	}
 }

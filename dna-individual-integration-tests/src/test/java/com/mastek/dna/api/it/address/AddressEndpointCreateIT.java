@@ -8,6 +8,7 @@ import org.hamcrest.core.IsNull;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 
 import com.mastek.dna.api.matcher.AddressMatcher;
 import com.mastek.dna.model.Address;
@@ -20,7 +21,7 @@ public class AddressEndpointCreateIT extends AddressEndpointSuper
 	{
 		final Address address = new Address().setLine1("line1").setLine2("line2").setCounty("county").setCountry("country").setPostCode("AB12 3CD");
 
-		final Address created = send(address, Address.class);
+		final Address created = send(address, Address.class, HttpStatus.CREATED);
 
 		Assert.assertThat("Id should not be null", created.getId(), IsNull.notNullValue());
 
@@ -29,8 +30,18 @@ public class AddressEndpointCreateIT extends AddressEndpointSuper
 		addressChecker.assertDatabase(individualId, created);
 	}
 
-	private <I, O> O send(final I toSend, final Class<O> responseClass)
+	@Test
+	public void testCreateIndividualNotFound()
 	{
-		return send(toSend, HttpMethod.POST, responseClass);
+		individualId = 1000;
+
+		final Address address = new Address().setLine1("line1").setLine2("line2").setCounty("county").setCountry("country").setPostCode("AB12 3CD");
+
+		send(address, null, HttpStatus.NOT_FOUND);
+	}
+
+	private <I, O> O send(final I toSend, final Class<O> responseClass, final HttpStatus httpStatus)
+	{
+		return send(toSend, HttpMethod.POST, responseClass, httpStatus);
 	}
 }

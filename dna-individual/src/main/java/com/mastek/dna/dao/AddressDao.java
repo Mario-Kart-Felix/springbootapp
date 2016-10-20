@@ -10,5 +10,7 @@ public interface AddressDao extends Repository<Address, Integer>
 
 	Address save(Address address);
 
-	void delete(Address address);
+	void delete(Integer id);
+
+	Long countByIndividualIdAndId(int individualId, int id);
 }
