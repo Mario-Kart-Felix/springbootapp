@@ -4,20 +4,22 @@
 
 	<groupId>com.mastek</groupId>
 	<artifactId>dna</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 
 	<packaging>pom</packaging>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
- 	
+
 		<spring.boot.version>1.4.1.RELEASE</spring.boot.version>
-		
+		<spring-cloud-netflix-version>1.2.2.BUILD-SNAPSHOT</spring-cloud-netflix-version>
 		<db.username>postgres</db.username>
 		<db.password>password</db.password>
-		
+
 		<api.username>username</api.username>
 		<api.password>password</api.password>
+		
+		<sonar.branch>master</sonar.branch>
 	</properties>
 
 	<dependencyManagement>
@@ -29,10 +31,34 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-netflix</artifactId>
+				<version>${spring-cloud-netflix-version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-eureka</artifactId>
+		</dependency>
+	</dependencies>
+
 	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.sonarsource.scanner.maven</groupId>
+					<artifactId>sonar-maven-plugin</artifactId>
+					<version>3.2</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -51,7 +77,32 @@
 		<module>dna-individual-integration-tests</module>
 		<module>dna-testing-utils</module>
 		<module>dna-db</module>
-        <module>dna-profile</module>
+		<module>dna-profile</module>
 		<module>dna-profile-integration-tests</module>
+		<module>dna-registry</module>
 	</modules>
+
+	<repositories>
+		<repository>
+			<id>spring-snapshots</id>
+			<url>http://repo.spring.io/snapshot</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>spring-milestones</id>
+			<url>http://repo.spring.io/milestone</url>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>spring-snapshots</id>
+			<url>http://repo.spring.io/snapshot</url>
+		</pluginRepository>
+		<pluginRepository>
+			<id>spring-milestones</id>
+			<url>http://repo.spring.io/milestone</url>
+		</pluginRepository>
+	</pluginRepositories>
 </project>
