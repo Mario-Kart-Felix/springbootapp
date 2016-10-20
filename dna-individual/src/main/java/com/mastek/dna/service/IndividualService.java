@@ -29,6 +29,6 @@ public class IndividualService
 	@Transactional
 	public void delete(final int id)
 	{
-		individualDao.delete(individualDao.findOne(id));
+		individualDao.delete(id);
 	}
 }

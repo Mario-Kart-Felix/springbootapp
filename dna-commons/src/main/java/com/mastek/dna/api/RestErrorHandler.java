@@ -45,6 +45,13 @@ public class RestErrorHandler
 		return validationErrors;
 	}
 
+	@ExceptionHandler(NotFoundException.class)
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	public void handleNotFound()
+	{
+		// Nothing to do here
+	}
+
 	private String resolveLocalizedErrorMessage(final MessageSourceResolvable messageSourceResolvable)
 	{
 		return messageSource.getMessage(messageSourceResolvable, LocaleContextHolder.getLocale());

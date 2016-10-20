@@ -2,19 +2,28 @@ package com.mastek.dna.api.it.individual;
 
 import org.junit.Test;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 
 public class IndividualEndpointDeleteIT extends IndividualEndpointExistingSuper
 {
 	@Test
 	public void testDelete()
 	{
-		send();
+		send(HttpStatus.OK);
 
 		individualChecker.assertNoRow(existing.getId());
 	}
 
-	private <I, O> O send()
+	@Test
+	public void testDeleteNotFound()
 	{
-		return send(null, HttpMethod.DELETE, null);
+		existing.setId(1000);
+
+		send(HttpStatus.NOT_FOUND);
+	}
+
+	private <I, O> O send(final HttpStatus httpStatus)
+	{
+		return send(null, HttpMethod.DELETE, null, httpStatus);
 	}
 }

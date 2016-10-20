@@ -12,6 +12,7 @@ import org.hamcrest.core.IsNull;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 
 import com.mastek.dna.api.ValidationError;
 import com.mastek.dna.api.ValidationErrorList;
@@ -33,7 +34,7 @@ public class IndividualEndpointCreateIT extends IndividualEndpointSuper
 				.setName(new Name().setTitle(Title.MR).setFirstname("John").setSurname("Smith"))
 				.setDob(LocalDate.of(1980, 7, 30));
 
-		final Individual created = send(individual, Individual.class);
+		final Individual created = send(individual, Individual.class, HttpStatus.CREATED);
 
 		Assert.assertThat("Id should not be null", created.getId(), IsNull.notNullValue());
 
@@ -52,7 +53,7 @@ public class IndividualEndpointCreateIT extends IndividualEndpointSuper
 		individual.setAddresses(new HashSet<>());
 		individual.getAddresses().add(new Address());
 
-		final ValidationErrorList validationErrorList = send(individual, ValidationErrorList.class);
+		final ValidationErrorList validationErrorList = send(individual, ValidationErrorList.class, HttpStatus.BAD_REQUEST);
 
 		final List<ValidationError> errors = validationErrorList.getErrors();
 		Assert.assertThat("Unexpected error list size", errors, IsCollectionWithSize.hasSize(3));
@@ -68,7 +69,7 @@ public class IndividualEndpointCreateIT extends IndividualEndpointSuper
 		final Individual individual = new Individual()
 				.setName(new Name());
 
-		final ValidationErrorList validationErrorList = send(individual, ValidationErrorList.class);
+		final ValidationErrorList validationErrorList = send(individual, ValidationErrorList.class, HttpStatus.BAD_REQUEST);
 
 		final List<ValidationError> errors = validationErrorList.getErrors();
 		Assert.assertThat("Unexpected error list size", errors, IsCollectionWithSize.hasSize(4));
@@ -84,15 +85,15 @@ public class IndividualEndpointCreateIT extends IndividualEndpointSuper
 	{
 		final Individual exising = individualLoader.loadEntity().setId(null);
 
-		final ValidationErrorList validationErrorList = send(exising, ValidationErrorList.class);
+		final ValidationErrorList validationErrorList = send(exising, ValidationErrorList.class, HttpStatus.BAD_REQUEST);
 
 		final List<ValidationError> errors = validationErrorList.getErrors();
 
 		assertValidationError(errors, "individual", "Duplicate individual");
 	}
 
-	private <I, O> O send(final I toSend, final Class<O> responseClass)
+	private <I, O> O send(final I toSend, final Class<O> responseClass, final HttpStatus httpStatus)
 	{
-		return send(toSend, HttpMethod.POST, responseClass);
+		return send(toSend, HttpMethod.POST, responseClass, httpStatus);
 	}
 }
