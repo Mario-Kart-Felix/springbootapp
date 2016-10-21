@@ -2,7 +2,7 @@ package com.mastek.dna.api.it.address;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.mastek.dna.model.Address;
+import com.mastek.api.Address;
 
 public final class AddressUtil
 {
@@ -12,11 +12,10 @@ public final class AddressUtil
 	}
 
 	public static final RowMapper<Address> ROW_MAPPER = (rs, rowNumber) -> new Address()
-			.setId(rs.getInt("id"))
-			.setLine1(rs.getString("address_line1"))
-			.setLine2(rs.getString("address_line2"))
-			.setCounty(rs.getString("county"))
-			.setCountry(rs.getString("country"))
-			.setPostCode(rs.getString("post_code"));
-
+			.withId(rs.getInt("id"))
+			.withLine1(rs.getString("address_line1"))
+			.withLine2(rs.getString("address_line2"))
+			.withCounty(rs.getString("county"))
+			.withCountry(rs.getString("country"))
+			.withPostCode(rs.getString("post_code"));
 }

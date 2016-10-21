@@ -10,17 +10,17 @@ import org.junit.Test;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 
+import com.mastek.api.Individual;
+import com.mastek.api.Title;
 import com.mastek.dna.api.matcher.IndividualMatcher;
-import com.mastek.dna.model.Individual;
-import com.mastek.dna.model.Name.Title;
 
 public class IndividualEndpointUpdateIT extends IndividualEndpointExistingSuper
 {
 	@Test
 	public void testUpdate() throws MalformedURLException, SQLException, DatabaseUnitException
 	{
-		existing.setDob(LocalDate.now().minusDays(1))
-				.getName().setTitle(Title.DR).setFirstname("Steve").setMiddlename("Paul").setSurname("Jones");
+		existing.withDob(LocalDate.now().minusDays(1).toString())
+				.getName().withTitle(Title.DR).withFirstname("Steve").withMiddlename("Paul").withSurname("Jones");
 
 		final Individual updated = send(existing, Individual.class, HttpStatus.OK);
 
@@ -34,7 +34,7 @@ public class IndividualEndpointUpdateIT extends IndividualEndpointExistingSuper
 	{
 		// TODO without changing the data the duplicate check kicks in not the
 		// not found exception
-		existing.setId(10000)
+		existing.withId(10000)
 				.getName().setFirstname("Pete");
 
 		send(existing, null, HttpStatus.NOT_FOUND);

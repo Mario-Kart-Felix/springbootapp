@@ -10,8 +10,8 @@ import org.junit.Test;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 
+import com.mastek.api.Address;
 import com.mastek.dna.api.matcher.AddressMatcher;
-import com.mastek.dna.model.Address;
 
 // TODO : Create should work with POST and PUT, and return different HTTP Status codes
 public class AddressEndpointCreateIT extends AddressEndpointSuper
@@ -19,7 +19,7 @@ public class AddressEndpointCreateIT extends AddressEndpointSuper
 	@Test
 	public void testCreate() throws MalformedURLException, SQLException, DatabaseUnitException
 	{
-		final Address address = new Address().setLine1("line1").setLine2("line2").setCounty("county").setCountry("country").setPostCode("AB12 3CD");
+		final Address address = new Address().withLine1("line1").withLine2("line2").withCounty("county").withCountry("country").withPostCode("AB12 3CD");
 
 		final Address created = send(address, Address.class, HttpStatus.CREATED);
 
@@ -35,7 +35,7 @@ public class AddressEndpointCreateIT extends AddressEndpointSuper
 	{
 		individualId = 1000;
 
-		final Address address = new Address().setLine1("line1").setLine2("line2").setCounty("county").setCountry("country").setPostCode("AB12 3CD");
+		final Address address = new Address().withLine1("line1").withLine2("line2").withCounty("county").withCountry("country").withPostCode("AB12 3CD");
 
 		send(address, null, HttpStatus.NOT_FOUND);
 	}

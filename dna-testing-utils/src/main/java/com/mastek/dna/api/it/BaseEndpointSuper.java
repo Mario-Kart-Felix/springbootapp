@@ -28,11 +28,16 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.MultiValueMap;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mastek.dna.DnaTestingRuntimeException;
 import com.mastek.dna.api.ValidationError;
 import com.mastek.dna.db.DatabaseResetter;
 
@@ -72,11 +77,18 @@ public abstract class BaseEndpointSuper
 
 	protected <I, O> O send(final I toSend, final HttpMethod httpMethod, final Class<O> responseClass, final HttpStatus httpStatus)
 	{
-		final ResponseEntity<O> response = restTemplate.exchange(getUrl(), httpMethod, new HttpEntity<I>(toSend, getHeaders()), responseClass, getUrlVariables());
+		final String json = getRequestJson(toSend);
+
+		LOGGER.info("Request URL : [{}]", getUrl());
+		LOGGER.info("URL Variable : [{}]", getUrlVariables());
+		LOGGER.info("HttpMethod : [{}]", httpMethod);
+		LOGGER.info("Request Body : [{}]", json);
+
+		final ResponseEntity<O> response = restTemplate.exchange(getUrl(), httpMethod, new HttpEntity<String>(json, getHeaders()), responseClass, getUrlVariables());
 		final O responseObject = response.getBody();
 
-		LOGGER.info("HttpStatus : {}", response.getStatusCode());
-		LOGGER.info("Body : {}", responseObject);
+		LOGGER.info("HttpStatus : [{}]", response.getStatusCode());
+		LOGGER.info("Body : [{}]", responseObject);
 
 		Assert.assertThat("Unexpected HttpStatus", response.getStatusCode(), Is.is(httpStatus));
 
@@ -88,6 +100,26 @@ public abstract class BaseEndpointSuper
 		return response.getBody();
 	}
 
+	private <I> String getRequestJson(final I toSend)
+	{
+		final ObjectMapper objMapper = getObjectMapper();
+		String json = null;
+		try
+		{
+			json = objMapper.writeValueAsString(toSend);
+		}
+		catch (final JsonProcessingException jpe)
+		{
+			throw new DnaTestingRuntimeException("Error creating JSON body", jpe);
+		}
+		return json;
+	}
+
+	protected ObjectMapper getObjectMapper()
+	{
+		return new ObjectMapper().setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+	}
+
 	protected boolean includeSecurity()
 	{
 		return true;
@@ -96,6 +128,7 @@ public abstract class BaseEndpointSuper
 	private MultiValueMap<String, String> getHeaders()
 	{
 		final HttpHeaders headers = new HttpHeaders();
+		headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
 
 		if (includeSecurity())
 		{
@@ -108,8 +141,7 @@ public abstract class BaseEndpointSuper
 	private void addSecurityHeader(final HttpHeaders headers)
 	{
 		final byte[] encodedAuth = Base64.getEncoder().encode(
-				String.format("%s:%s", apiUsername, apiPassword)
-						.getBytes(Charset.forName("UTF-8")));
+				String.format("%s:%s", apiUsername, apiPassword).getBytes(Charset.forName("UTF-8")));
 
 		headers.set("Authorization", "Basic " + new String(encodedAuth));
 	}

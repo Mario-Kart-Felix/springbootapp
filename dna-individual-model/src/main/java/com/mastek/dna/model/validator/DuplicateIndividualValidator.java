@@ -6,14 +6,14 @@ import javax.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.mastek.dna.dao.IndividualDao;
+import com.mastek.dna.dao.FindByDuplicateCriteria;
 import com.mastek.dna.model.Individual;
 
 @Component
 public class DuplicateIndividualValidator implements ConstraintValidator<DuplicateIndividual, Individual>
 {
 	@Autowired
-	private IndividualDao individualDao;
+	private FindByDuplicateCriteria findByDuplicateCriteria;
 
 	@Override
 	public void initialize(final DuplicateIndividual constraintAnnotation)
@@ -29,7 +29,7 @@ public class DuplicateIndividualValidator implements ConstraintValidator<Duplica
 			return true;
 		}
 
-		final Individual individual = individualDao.findByDobAndNameFirstnameAndNameSurname(value.getDob(), value.getName().getFirstname(), value.getName().getSurname());
+		final Individual individual = findByDuplicateCriteria.findByCriteria(value.getDob(), value.getName().getFirstname(), value.getName().getSurname());
 
 		return null == individual || individual.getId().equals(value.getId());
 	}

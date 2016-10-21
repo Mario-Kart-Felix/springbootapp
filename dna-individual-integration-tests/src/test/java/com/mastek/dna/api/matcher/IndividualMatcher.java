@@ -4,7 +4,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
 
-import com.mastek.dna.model.Individual;
+import com.mastek.api.Individual;
 
 public class IndividualMatcher extends TypeSafeMatcher<Individual>
 {

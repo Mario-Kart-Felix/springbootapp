@@ -7,7 +7,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
 
-import com.mastek.dna.model.Address;
+import com.mastek.api.Address;
 
 public class AddressMatcher extends TypeSafeMatcher<Address>
 {
