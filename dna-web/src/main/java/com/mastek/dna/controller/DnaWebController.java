@@ -18,6 +18,6 @@ public class DnaWebController extends org.springframework.web.servlet.config.ann
 	@Override
 	public void addResourceHandlers(org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/**").addResourceLocations(RESOURCE_LOCATIONS);
-	}
+}
 
 }
