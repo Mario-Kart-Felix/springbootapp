@@ -1,59 +1,59 @@
 package com.mastek.dna.model;
 
-import java.util.List;
+import com.mastek.dna.model.validator.Api;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import javax.validation.Valid;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
+@Entity
+@Table(name = "individual_profile")
+public class Profile {
+    private Integer id;
+    private Integer individualId;
+    private String fingerPrintData;
+    private String retinaScanData;
 
-import com.mastek.dna.model.validator.Api;
+    @Null(groups = Api.class)
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "individual_profile_seq")
+    @SequenceGenerator(name = "individual_profile_seq", sequenceName = "individual_profile_seq", allocationSize = 1)
+    public Integer getId() {
+        return id;
+    }
 
-public class Profile
-{
-	private Integer id;
-	private List<String> fingerPrint;
-	private List<String> retinaScan;
+    public void setId(final Integer id) {
+        this.id = id;
+    }
 
-	@Null(groups = Api.class)
-	public Integer getId()
-	{
-		return id;
-	}
+    @NotNull
+    public Integer getIndividualId() {
+        return individualId;
+    }
 
-	public void setId(final Integer id)
-	{
-		this.id = id;
-	}
+    public void setIndividualId(Integer individualId) {
+        this.individualId = individualId;
+    }
+    @NotNull
+    public String getFingerPrintData() {
+        return fingerPrintData;
+    }
 
-	@Valid
-	@NotNull
-	public List<String> getFingerPrint()
-	{
-		return fingerPrint;
-	}
+    public void setFingerPrintData(String fingerPrintData) {
+        this.fingerPrintData = fingerPrintData;
+    }
+    @NotNull
+    public String getRetinaScanData() {
+        return retinaScanData;
+    }
 
-	public void setFingerPrint(final List<String> fingerPrint)
-	{
-		this.fingerPrint = fingerPrint;
-	}
+    public void setRetinaScanData(String retinaScanData) {
+        this.retinaScanData = retinaScanData;
+    }
 
-	@Valid
-	@NotNull
-	public List<String> getRetinaScan()
-	{
-		return retinaScan;
-	}
-
-	public void setRetinaScan(final List<String> retinaScan)
-	{
-		this.retinaScan = retinaScan;
-	}
-
-	@Override
-	public String toString()
-	{
-		return ToStringBuilder.reflectionToString(this);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 }
