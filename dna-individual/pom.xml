@@ -65,6 +65,17 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -74,7 +85,7 @@
 				<filtering>true</filtering>
 			</resource>
 		</resources>
-
+		
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

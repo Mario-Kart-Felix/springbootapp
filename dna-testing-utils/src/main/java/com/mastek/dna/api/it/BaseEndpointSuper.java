@@ -140,10 +140,11 @@ public abstract class BaseEndpointSuper
 
 	private void addSecurityHeader(final HttpHeaders headers)
 	{
+		final Charset charset = Charset.forName("UTF-8");
 		final byte[] encodedAuth = Base64.getEncoder().encode(
-				String.format("%s:%s", apiUsername, apiPassword).getBytes(Charset.forName("UTF-8")));
+				String.format("%s:%s", apiUsername, apiPassword).getBytes(charset));
 
-		headers.set("Authorization", "Basic " + new String(encodedAuth));
+		headers.set("Authorization", "Basic " + new String(encodedAuth, charset));
 	}
 
 	protected Map<String, Object> getUrlVariables()
