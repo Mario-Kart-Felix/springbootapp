@@ -21,11 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 )
  */
 
-//@NamedStoredProcedureQuery(name = "testmatcher", procedureName = "testmatcher", parameters = {
-//		@StoredProcedureParameter(mode = ParameterMode.OUT, type = Integer.class, name = "indid")
-//
-//})
-
 @RestController
 public class MatcherController
 {
@@ -38,7 +33,7 @@ public class MatcherController
 	public String home()
 	{
 
-		// Define the stored procedure
+		// Define the stored procedure to call
 		StoredProcedureQuery query = em.createStoredProcedureQuery("fullsamplematcher");
 
 		// Register the parameters
@@ -51,9 +46,18 @@ public class MatcherController
 		query.execute();
 
 		Integer indId = (Integer) query.getOutputParameterValue("indid");
-
-		return ("Full individual match found for sample fingerprint: " + query.getParameterValue("sample_fprint")
-				+ ", retina sample: " + query.getParameterValue("sample_retina") + ".......  Individual has id of: " + indId);
+		String result;
+		
+		if (indId == null)
+		{
+			result = ("Full individual match not found");
+		}
+		else
+		{
+			result = ("Full individual match found >>>>>>> Sample fingerprint: " + query.getParameterValue("sample_fprint")
+					+ ", retina sample: " + query.getParameterValue("sample_retina") + ".......  Individual has id of: " + indId);
+		}
+		return result;
 
 	}
 
