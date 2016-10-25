@@ -1,9 +1,6 @@
 package com.mastek.dna.api;
 
-
 import javax.persistence.EntityManager;
-import javax.persistence.NamedStoredProcedureQuery;
-import javax.persistence.StoredProcedureParameter;
 import javax.persistence.StoredProcedureQuery;
 import javax.persistence.ParameterMode;
 import javax.persistence.PersistenceContext;
@@ -24,38 +21,40 @@ import org.springframework.web.bind.annotation.RestController;
 )
  */
 
-@NamedStoredProcedureQuery(
-		name = "testmatcher", 
-		procedureName = "testmatcher", 
-		parameters = { 
-			@StoredProcedureParameter(mode = ParameterMode.OUT, type = Integer.class, name = "indId")
-}
-)
+//@NamedStoredProcedureQuery(name = "testmatcher", procedureName = "testmatcher", parameters = {
+//		@StoredProcedureParameter(mode = ParameterMode.OUT, type = Integer.class, name = "indid")
+//
+//})
 
 @RestController
 public class MatcherController
 {
-	
+
 	private static final String ROOT_URL = "/match/full";
 	@PersistenceContext
 	private EntityManager em;
-	
+
 	@GetMapping(ROOT_URL)
-	public String home() {
-		
-		// define the stored procedure
-		//StoredProcedureQuery query = em.createStoredProcedureQuery("fullsamplematcher");
-		//query.setParameter("sample_fprint", "ABC12345678");
-		//query.setParameter("sample_retina", "CD987654");
-		StoredProcedureQuery query = em.createStoredProcedureQuery("testmatcher");
+	public String home()
+	{
+
+		// Define the stored procedure
+		StoredProcedureQuery query = em.createStoredProcedureQuery("fullsamplematcher");
+
+		// Register the parameters
+		query.registerStoredProcedureParameter("sample_fprint", String.class, ParameterMode.IN);
+		query.registerStoredProcedureParameter("sample_retina", String.class, ParameterMode.IN);
+		query.registerStoredProcedureParameter("indid", Integer.class, ParameterMode.OUT);
+		query.setParameter("sample_fprint", "ABC12345678");
+		query.setParameter("sample_retina", "CD987654");
+
 		query.execute();
 
-		Integer indId = (Integer) query.getOutputParameterValue("indId");
-        return "Hello World! - Individual has id of: "+ indId;
-    }
-	
-	
-	
-	
+		Integer indId = (Integer) query.getOutputParameterValue("indid");
+
+		return ("Full individual match found for sample fingerprint: " + query.getParameterValue("sample_fprint")
+				+ ", retina sample: " + query.getParameterValue("sample_retina") + ".......  Individual has id of: " + indId);
+
+	}
 
 }
