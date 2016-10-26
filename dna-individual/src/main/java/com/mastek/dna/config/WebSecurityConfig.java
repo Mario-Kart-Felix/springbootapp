@@ -33,8 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
 		httpSecurity.authorizeRequests().anyRequest().hasRole(ROLE_USER)
 				.and().httpBasic()
 				.and().csrf().disable();
-		/*
-		 * httpSecurity.authorizeRequests() .anyRequest().permitAll();
-		 */
+		/*httpSecurity.authorizeRequests()
+				.anyRequest().permitAll();*/
 	}
 }
