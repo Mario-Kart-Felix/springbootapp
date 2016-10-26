@@ -30,10 +30,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
 	@Override
 	protected void configure(final HttpSecurity httpSecurity) throws Exception
 	{
-		/*httpSecurity.authorizeRequests().anyRequest().hasRole(ROLE_USER)
+		httpSecurity.authorizeRequests().anyRequest().hasRole(ROLE_USER)
 				.and().httpBasic()
-				.and().csrf().disable();*/
-		httpSecurity.authorizeRequests()
-				.anyRequest().permitAll();
+				.and().csrf().disable();
+		/*
+		 * httpSecurity.authorizeRequests() .anyRequest().permitAll();
+		 */
 	}
 }
