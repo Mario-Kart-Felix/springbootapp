@@ -4,7 +4,7 @@ import java.util.Map;
 
 import org.junit.Before;
 
-import com.mastek.dna.model.Individual;
+import com.mastek.api.Individual;
 
 public class IndividualEndpointExistingSuper extends IndividualEndpointSuper
 {

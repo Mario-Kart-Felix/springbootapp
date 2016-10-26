@@ -1,0 +1,116 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.mastek</groupId>
+		<artifactId>dna</artifactId>
+		<version>0.0.2-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>dna-individual-model-api</artifactId>
+
+	<properties>
+		<schema.dir>${project.build.directory}/model-schemas</schema.dir>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.mastek</groupId>
+			<artifactId>dna-individual-model</artifactId>
+			<version>${project.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jvnet.jaxb2_commons</groupId>
+			<artifactId>jaxb2-basics-runtime</artifactId>
+			<version>0.6.4</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>unpack-xsd</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>unpack</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>com.mastek</groupId>
+									<artifactId>dna-individual-model</artifactId>
+									<version>${project.version}</version>
+									<outputDirectory>${schema.dir}</outputDirectory>
+								</artifactItem>
+							</artifactItems>
+							<includes>**/*.xsd</includes>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>jaxb2-maven-plugin</artifactId>
+				<version>2.3</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.jvnet.jaxb2_commons</groupId>
+						<artifactId>jaxb2-basics</artifactId>
+						<version>0.6.4</version>
+					</dependency>
+					<dependency>
+						<groupId>org.jvnet.jaxb2_commons</groupId>
+						<artifactId>jaxb2-value-constructor</artifactId>
+						<version>3.0</version>
+					</dependency>
+					<dependency>
+						<groupId>net.java.dev.jaxb2-commons</groupId>
+						<artifactId>jaxb-fluent-api</artifactId>
+						<version>2.1.8</version>
+					</dependency>
+					<dependency>
+						<groupId>com.sun.xml.bind</groupId>
+						<artifactId>jaxb-xjc</artifactId>
+						<version>2.2.6</version>
+					</dependency>
+					<dependency>
+						<groupId>com.sun.xml.bind</groupId>
+						<artifactId>jaxb-impl</artifactId>
+						<version>2.2.6</version>
+					</dependency>
+				</dependencies>
+				<executions>
+					<execution>
+						<id>xjc</id>
+						<goals>
+							<goal>xjc</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<sources>
+						<source>${schema.dir}</source>
+					</sources>
+					<packageName>com.mastek.api</packageName>
+					<extension>true</extension>
+					<arguments>
+						<argument>-Xfluent-api</argument>
+						<argument>-Xequals</argument>
+						<argument>-XhashCode</argument>
+						<argument>-XtoString</argument>
+						<argument>-Xsetters</argument>
+						<argument>-Xsetters-mode=direct</argument>
+					</arguments>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

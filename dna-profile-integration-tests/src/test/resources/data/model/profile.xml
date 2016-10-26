@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<individual_profile id="$[id]" individual_id="$[individual_id]"  finger_print_data="$[finger_print_data]" retina_scan_data="$[retina_scan_data]"/>
+</dataset>

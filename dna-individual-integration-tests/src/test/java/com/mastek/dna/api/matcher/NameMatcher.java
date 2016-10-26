@@ -4,7 +4,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
 
-import com.mastek.dna.model.Name;
+import com.mastek.api.Name;
 
 public class NameMatcher extends TypeSafeMatcher<Name>
 {

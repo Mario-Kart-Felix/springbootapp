@@ -27,6 +27,13 @@
 		</dependency>
 
 		<dependency>
+			<groupId>com.mastek</groupId>
+			<artifactId>dna-individual-model-api</artifactId>
+			<version>${project.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
@@ -72,6 +79,14 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<configuration>
+					<destFile>${project.basedir}/../target/jacoco-it.exec</destFile>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

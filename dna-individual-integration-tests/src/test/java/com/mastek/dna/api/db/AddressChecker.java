@@ -9,8 +9,8 @@ import java.util.Arrays;
 import org.dbunit.DatabaseUnitException;
 import org.springframework.stereotype.Component;
 
+import com.mastek.api.Address;
 import com.mastek.dna.db.BaseChecker;
-import com.mastek.dna.model.Address;
 
 @Component
 public class AddressChecker extends BaseChecker

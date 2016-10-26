@@ -4,7 +4,7 @@ import java.util.Map;
 
 import org.junit.Before;
 
-import com.mastek.dna.model.Address;
+import com.mastek.api.Address;
 
 public class AddressEndpointExistingSuper extends AddressEndpointSuper
 {

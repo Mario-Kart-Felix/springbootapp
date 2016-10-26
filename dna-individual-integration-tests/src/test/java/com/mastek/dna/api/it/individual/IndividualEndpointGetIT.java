@@ -5,8 +5,8 @@ import org.junit.Test;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 
+import com.mastek.api.Individual;
 import com.mastek.dna.api.matcher.IndividualMatcher;
-import com.mastek.dna.model.Individual;
 
 public class IndividualEndpointGetIT extends IndividualEndpointExistingSuper
 {

@@ -10,19 +10,19 @@ import org.junit.Test;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 
+import com.mastek.api.Address;
 import com.mastek.dna.api.matcher.AddressMatcher;
-import com.mastek.dna.model.Address;
 
 public class AddressEndpointUpdateIT extends AddressEndpointExistingSuper
 {
 	@Test
 	public void testUpdate() throws MalformedURLException, SQLException, DatabaseUnitException
 	{
-		existing.setLine1("new line 1")
-				.setLine2("new line 2")
-				.setCounty("new county")
-				.setCountry("new country")
-				.setPostCode("XY01 QA1");
+		existing.withLine1("new line 1")
+				.withLine2("new line 2")
+				.withCounty("new county")
+				.withCountry("new country")
+				.withPostCode("XY01 QA1");
 
 		final Address updated = send(existing, Address.class, HttpStatus.OK);
 

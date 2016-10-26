@@ -7,7 +7,7 @@ import org.springframework.data.repository.Repository;
 
 import com.mastek.dna.model.Individual;
 
-public interface IndividualDao extends Repository<Individual, Integer>
+public interface IndividualDao extends Repository<Individual, Integer>, FindByDuplicateCriteria
 {
 	boolean exists(int id);
 
@@ -20,4 +20,10 @@ public interface IndividualDao extends Repository<Individual, Integer>
 	void delete(int id);
 
 	Individual findByDobAndNameFirstnameAndNameSurname(LocalDate dob, String firstname, String surname);
+
+	@Override
+	default Individual findByCriteria(final LocalDate dob, final String firstname, final String surname)
+	{
+		return findByDobAndNameFirstnameAndNameSurname(dob, firstname, surname);
+	}
 }

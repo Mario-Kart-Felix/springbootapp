@@ -13,6 +13,12 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.mastek</groupId>
+			<artifactId>dna-individual-model</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.mastek</groupId>
 			<artifactId>dna-commons</artifactId>
 			<version>${project.version}</version>
 		</dependency>
@@ -31,11 +37,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
-
 
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -64,6 +65,17 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -73,7 +85,7 @@
 				<filtering>true</filtering>
 			</resource>
 		</resources>
-
+		
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
