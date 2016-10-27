@@ -6,4 +6,5 @@
 
 	<individual id="2" title="MR" first_name="No" last_name="Address" dob="1990-01-29" />
 	
+	<individual_profile />
 </dataset>
