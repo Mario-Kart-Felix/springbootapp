@@ -34,7 +34,7 @@ public class MatcherController
 	{
 
 		// Define the stored procedure to call
-		StoredProcedureQuery query = em.createStoredProcedureQuery("fullsamplematcher");
+		StoredProcedureQuery query = em.createStoredProcedureQuery("fullmatcher");
 
 		// Register the parameters
 		query.registerStoredProcedureParameter("sample_fprint", String.class, ParameterMode.IN);

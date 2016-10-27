@@ -18,5 +18,5 @@ public interface MatcherDao extends Repository<Sample, Integer>
 
 	void delete(int id);
 
-	Integer findFullMatchingProfile(Sample sample);
+	//Integer findFullMatchingProfile(Sample sample);
 }
