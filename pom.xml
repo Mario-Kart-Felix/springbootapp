@@ -146,6 +146,7 @@
 		<module>dna-registry</module>
 		<module>dna-web</module>
     <module>dna-matcher</module>
+    <module>dna-matcher-model</module>
   </modules>
 
 </project>
