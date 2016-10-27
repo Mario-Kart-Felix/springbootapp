@@ -22,15 +22,11 @@
 
 		<jacoco.version>0.7.7.201606060606</jacoco.version>
 
-		<sonar.projectKey>dna</sonar.projectKey>
-		<sonar.projectName>dna</sonar.projectName>
-		<sonar.projectVersion>${project.version}</sonar.projectVersion>
+		<sonar.host.url>http://172.16.68.199:10001</sonar.host.url>
 
 		<sonar.branch>master</sonar.branch>
 		<sonar.jacoco.itReportPath>${project.basedir}/../target/jacoco-it.exec</sonar.jacoco.itReportPath>
 		<sonar.language>java</sonar.language>
-		
-		<sonar.modules>dna-individual,dna-individual-integration-tests</sonar.modules>
 	</properties>
 
 	<dependencyManagement>
@@ -148,11 +144,11 @@
 		<module>dna-testing-utils</module>
 		<module>dna-db</module>
 		<module>dna-profile</module>
-<!-- 		<module>dna-profile-integration-tests</module> -->
+		<module>dna-profile-integration-tests</module>
 		<module>dna-registry</module>
-	<!-- 	<module>dna-web</module>
+		<module>dna-web</module>
 		<module>dna-individual-profile</module>
-		<module>dna-individual-profile-integration-tests</module> -->
+		<module>dna-individual-profile-integration-tests</module>
 	</modules>
 
 </project>
