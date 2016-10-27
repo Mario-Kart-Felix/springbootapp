@@ -22,9 +22,15 @@
 
 		<jacoco.version>0.7.7.201606060606</jacoco.version>
 
+		<sonar.projectKey>dna</sonar.projectKey>
+		<sonar.projectName>dna</sonar.projectName>
+		<sonar.projectVersion>${project.version}</sonar.projectVersion>
+
 		<sonar.branch>master</sonar.branch>
 		<sonar.jacoco.itReportPath>${project.basedir}/../target/jacoco-it.exec</sonar.jacoco.itReportPath>
 		<sonar.language>java</sonar.language>
+		
+		<sonar.modules>dna-individual,dna-individual-integration-tests</sonar.modules>
 	</properties>
 
 	<dependencyManagement>
