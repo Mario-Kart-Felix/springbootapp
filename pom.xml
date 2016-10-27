@@ -138,7 +138,7 @@
 		<module>dna-individual</module>
 		<module>dna-individual-model</module>
 		<module>dna-individual-model-api</module>
-	<!-- 	<module>dna-individual-integration-tests</module> -->
+		<module>dna-individual-integration-tests</module>
 		<module>dna-testing-utils</module>
 		<module>dna-db</module>
 		<module>dna-profile</module>
