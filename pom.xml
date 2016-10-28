@@ -145,14 +145,12 @@
 		<module>dna-profile-integration-tests</module>
 		<module>dna-registry</module>
 		<module>dna-web</module>
-<<<<<<< HEAD
     <module>dna-matcher</module>
     <module>dna-matcher-model</module>
-  </modules>
-=======
+
 		<module>dna-individual-profile</module>
 		<module>dna-individual-profile-integration-tests</module>
 	</modules>
->>>>>>> master
+
 
 </project>

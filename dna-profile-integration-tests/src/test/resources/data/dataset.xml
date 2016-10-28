@@ -5,9 +5,6 @@
 	<individual_profile id="1" individual_id="1" finger_print_data="HC8UHVGGAG1PVMB6" retina_scan_data="6IT49S9A8SXMVYPD"/>
 
 	<individual id="2" title="MR" first_name="No" last_name="Address" dob="1990-01-29" />
-	
-<<<<<<< HEAD
-=======
 	<individual_profile />
->>>>>>> master
+
 </dataset>
