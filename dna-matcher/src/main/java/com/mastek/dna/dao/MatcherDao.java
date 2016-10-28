@@ -6,7 +6,7 @@ import org.springframework.data.repository.Repository;
 
 import com.mastek.dna.model.Sample;
 
-public interface MatcherDao extends Repository<Sample, Integer>
+public interface MatcherDao extends Repository<Sample, Integer> , MatcherDaoSProcCustom
 {
 	boolean exists(int id);
 
@@ -18,5 +18,4 @@ public interface MatcherDao extends Repository<Sample, Integer>
 
 	void delete(int id);
 
-	//Integer findFullMatchingProfile(Sample sample);
 }

@@ -45,10 +45,8 @@ public class MatcherService
 		return matcherDao.findAll();
 	}
 	
-	/*@Transactional
-	//[TODO]
-	public Integer findFullMatchingProfile(final Sample sample)
+	public Integer findFullMatch(final Sample sample)
 	{
-		return 2;
-	}*/
+		return matcherDao.findFullSampleMatch(sample);
+	}
 }
