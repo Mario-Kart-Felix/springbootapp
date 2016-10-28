@@ -13,7 +13,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 		<spring.boot.version>1.4.1.RELEASE</spring.boot.version>
-		<spring-cloud-netflix-version>1.2.2.BUILD-SNAPSHOT</spring-cloud-netflix-version>
+		<spring-cloud-netflix-version>1.2.1.RELEASE</spring-cloud-netflix-version>
 		<db.username>postgres</db.username>
 		<db.password>password</db.password>
 
@@ -145,8 +145,14 @@
 		<module>dna-profile-integration-tests</module>
 		<module>dna-registry</module>
 		<module>dna-web</module>
+<<<<<<< HEAD
     <module>dna-matcher</module>
     <module>dna-matcher-model</module>
   </modules>
+=======
+		<module>dna-individual-profile</module>
+		<module>dna-individual-profile-integration-tests</module>
+	</modules>
+>>>>>>> master
 
 </project>
