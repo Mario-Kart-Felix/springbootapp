@@ -1,28 +1,24 @@
 package com.mastek.dna.model;
 
-import java.time.LocalDate;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
+import javax.persistence.Table;
 import javax.validation.constraints.Null;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import com.mastek.dna.model.validator.Api;
 
-
 @Entity
+@Table(name = "sample_profile")
 public class Sample
 {
 	private Integer id;
 	private String fingerprint;
 	private String retinascan;
-	
 
 	@Null(groups = Api.class)
 	@Id
@@ -38,7 +34,6 @@ public class Sample
 		this.id = id;
 		return this;
 	}
-
 
 	@Column(name = "finger_print_data")
 	public String getFingerprint()
