@@ -147,6 +147,7 @@
 		<module>dna-web</module>
 		<module>dna-individual-profile</module>
 		<module>dna-individual-profile-integration-tests</module>
+		<module>dna-reports</module>
 	</modules>
 
 </project>
