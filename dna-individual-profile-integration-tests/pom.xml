@@ -54,12 +54,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.jayway.jsonpath</groupId>
-			<artifactId>json-path</artifactId>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
 			<groupId>org.unitils</groupId>
 			<artifactId>unitils-core</artifactId>
 			<version>3.4.2</version>
@@ -129,7 +123,7 @@
 			<plugin>
 				<groupId>com.bazaarvoice.maven.plugins</groupId>
 				<artifactId>process-exec-maven-plugin</artifactId>
-				<version>0.7</version>
+				<version>0.8</version>
 				<executions>
 					<execution>
 						<id>start-registry</id>

@@ -17,7 +17,9 @@ import javax.validation.constraints.Null;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.mastek.dna.model.json.LocalDateDeserializer;
 import com.mastek.dna.model.json.LocalDateSerializer;
 import com.mastek.dna.model.validator.Age;
 import com.mastek.dna.model.validator.Api;
@@ -51,6 +53,7 @@ public class Individual
 	@NotNull
 	@Age(max = 120)
 	@JsonSerialize(using = LocalDateSerializer.class)
+	@JsonDeserialize(using = LocalDateDeserializer.class)
 	public LocalDate getDob()
 	{
 		return dob;
